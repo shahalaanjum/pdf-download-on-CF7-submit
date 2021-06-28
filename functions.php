@@ -6,7 +6,7 @@ function download(){
     <script type="text/javascript">
 		function SaveToDisk(fileURL, fileName) {
 			// for non-IE
-			if (!window.ActiveXObject) {
+			/* if (!window.ActiveXObject) {
 				var save = document.createElement('a');
 				save.href = fileURL;
 				save.target = '_blank';
@@ -28,8 +28,17 @@ function download(){
 				_window.document.close();
 				_window.document.execCommand('SaveAs', true, fileName || fileURL)
 				_window.close();
-			}
-		}
+			} 
+			*/
+			var a = document.createElement("a");
+			a.href = fileURL;
+			fileName = fileURL.split("/").pop();
+			a.download = fileName;
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+			a.remove();
+		} 
 
 
      var downloadURL = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';   
